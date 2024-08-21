@@ -26,31 +26,87 @@ public class CustomerView extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPanel1 = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        cusIdLbl = new javax.swing.JLabel();
+        cusIdTxt = new javax.swing.JTextField();
+        cusIdLbl1 = new javax.swing.JLabel();
+        cusIdTxt1 = new javax.swing.JTextField();
+        cusIdLbl2 = new javax.swing.JLabel();
+        cusIdTxt2 = new javax.swing.JTextField();
+        cusIdLbl3 = new javax.swing.JLabel();
+        cusIdTxt3 = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setSize(new java.awt.Dimension(1920, 1280));
 
-        jButton1.setText("Click me!");
+        jPanel1.setBackground(new java.awt.Color(255, 204, 102));
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel1.setBackground(new java.awt.Color(255, 255, 153));
+        jLabel1.setFont(new java.awt.Font("Marker Felt", 1, 36)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 153, 102));
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel1.setText("Customer Form");
+        jLabel1.setOpaque(true);
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 10, -1, -1));
+
+        cusIdLbl.setFont(new java.awt.Font("Lucida Grande", 1, 14)); // NOI18N
+        cusIdLbl.setText("Customer ID");
+        jPanel1.add(cusIdLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 100, 110, 30));
+
+        cusIdTxt.setFont(new java.awt.Font("Noto Sans NKo", 0, 18)); // NOI18N
+        jPanel1.add(cusIdTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 100, 190, -1));
+
+        cusIdLbl1.setFont(new java.awt.Font("Lucida Grande", 1, 14)); // NOI18N
+        cusIdLbl1.setText("Customer Name");
+        jPanel1.add(cusIdLbl1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 160, 150, 30));
+
+        cusIdTxt1.setFont(new java.awt.Font("Noto Sans NKo", 0, 18)); // NOI18N
+        jPanel1.add(cusIdTxt1, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 160, 190, -1));
+
+        cusIdLbl2.setFont(new java.awt.Font("Lucida Grande", 1, 14)); // NOI18N
+        cusIdLbl2.setText("Customer NIC");
+        jPanel1.add(cusIdLbl2, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 220, 110, 30));
+
+        cusIdTxt2.setFont(new java.awt.Font("Noto Sans NKo", 0, 18)); // NOI18N
+        jPanel1.add(cusIdTxt2, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 220, 190, -1));
+
+        cusIdLbl3.setFont(new java.awt.Font("Lucida Grande", 1, 14)); // NOI18N
+        cusIdLbl3.setText("Customer Contact");
+        jPanel1.add(cusIdLbl3, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 290, 160, 30));
+
+        cusIdTxt3.setFont(new java.awt.Font("Noto Sans NKo", 0, 18)); // NOI18N
+        jPanel1.add(cusIdTxt3, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 290, 190, -1));
+
+        jButton1.setText("jButton1");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 370, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(409, Short.MAX_VALUE)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(285, 285, 285))
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(230, 230, 230)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(195, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 919, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -88,6 +144,16 @@ public class CustomerView extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel cusIdLbl;
+    private javax.swing.JLabel cusIdLbl1;
+    private javax.swing.JLabel cusIdLbl2;
+    private javax.swing.JLabel cusIdLbl3;
+    private javax.swing.JTextField cusIdTxt;
+    private javax.swing.JTextField cusIdTxt1;
+    private javax.swing.JTextField cusIdTxt2;
+    private javax.swing.JTextField cusIdTxt3;
     private javax.swing.JButton jButton1;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
 }
