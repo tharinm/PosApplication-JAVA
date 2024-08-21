@@ -31,15 +31,14 @@ public class CustomerView extends javax.swing.JFrame {
         cusIdLbl = new javax.swing.JLabel();
         cusIdTxt = new javax.swing.JTextField();
         cusIdLbl1 = new javax.swing.JLabel();
-        cusIdTxt1 = new javax.swing.JTextField();
+        cusName = new javax.swing.JTextField();
         cusIdLbl2 = new javax.swing.JLabel();
-        cusIdTxt2 = new javax.swing.JTextField();
+        cusNic = new javax.swing.JTextField();
         cusIdLbl3 = new javax.swing.JLabel();
-        cusIdTxt3 = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
+        cusContact = new javax.swing.JTextField();
+        addButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setSize(new java.awt.Dimension(1920, 1280));
 
         jPanel1.setBackground(new java.awt.Color(255, 204, 102));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -57,56 +56,90 @@ public class CustomerView extends javax.swing.JFrame {
         jPanel1.add(cusIdLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 100, 110, 30));
 
         cusIdTxt.setFont(new java.awt.Font("Noto Sans NKo", 0, 18)); // NOI18N
+        cusIdTxt.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cusIdTxtActionPerformed(evt);
+            }
+        });
         jPanel1.add(cusIdTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 100, 190, -1));
 
         cusIdLbl1.setFont(new java.awt.Font("Lucida Grande", 1, 14)); // NOI18N
         cusIdLbl1.setText("Customer Name");
         jPanel1.add(cusIdLbl1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 160, 150, 30));
 
-        cusIdTxt1.setFont(new java.awt.Font("Noto Sans NKo", 0, 18)); // NOI18N
-        jPanel1.add(cusIdTxt1, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 160, 190, -1));
+        cusName.setFont(new java.awt.Font("Noto Sans NKo", 0, 18)); // NOI18N
+        jPanel1.add(cusName, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 160, 190, -1));
 
         cusIdLbl2.setFont(new java.awt.Font("Lucida Grande", 1, 14)); // NOI18N
         cusIdLbl2.setText("Customer NIC");
         jPanel1.add(cusIdLbl2, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 220, 110, 30));
 
-        cusIdTxt2.setFont(new java.awt.Font("Noto Sans NKo", 0, 18)); // NOI18N
-        jPanel1.add(cusIdTxt2, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 220, 190, -1));
+        cusNic.setFont(new java.awt.Font("Noto Sans NKo", 0, 18)); // NOI18N
+        jPanel1.add(cusNic, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 220, 190, -1));
 
         cusIdLbl3.setFont(new java.awt.Font("Lucida Grande", 1, 14)); // NOI18N
         cusIdLbl3.setText("Customer Contact");
         jPanel1.add(cusIdLbl3, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 290, 160, 30));
 
-        cusIdTxt3.setFont(new java.awt.Font("Noto Sans NKo", 0, 18)); // NOI18N
-        jPanel1.add(cusIdTxt3, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 290, 190, -1));
-
-        jButton1.setText("jButton1");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        cusContact.setFont(new java.awt.Font("Noto Sans NKo", 0, 18)); // NOI18N
+        cusContact.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                cusContactActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 370, -1, -1));
+        jPanel1.add(cusContact, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 290, 190, -1));
+
+        addButton.setBackground(new java.awt.Color(255, 102, 0));
+        addButton.setFont(new java.awt.Font("InaiMathi", 3, 18)); // NOI18N
+        addButton.setText("Add");
+        addButton.setToolTipText("");
+        addButton.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, null, new java.awt.Color(51, 153, 0), null, null));
+        addButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addButtonActionPerformed(evt);
+            }
+        });
+        jPanel1.add(addButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 370, 110, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 524, Short.MAX_VALUE)
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 919, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 456, Short.MAX_VALUE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void addButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addButtonActionPerformed
+
+        String id = cusIdTxt.getText();
+        String customerName = cusName.getText();
+        String nic = cusNic.getText();
+//        int contact=cusContact.getText();
+        int contact = Integer.parseInt(cusContact.getText());
+
+        System.out.println(" ID " + id);
+        System.out.println(" Name " + customerName);
+        System.out.println(" NIC " + nic);
+        System.out.println(" NIC " + contact);
+    }//GEN-LAST:event_addButtonActionPerformed
+
+    private void cusIdTxtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cusIdTxtActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_cusIdTxtActionPerformed
+
+    private void cusContactActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cusContactActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cusContactActionPerformed
 
     /**
      * @param args the command line arguments
@@ -144,15 +177,15 @@ public class CustomerView extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton addButton;
+    private javax.swing.JTextField cusContact;
     private javax.swing.JLabel cusIdLbl;
     private javax.swing.JLabel cusIdLbl1;
     private javax.swing.JLabel cusIdLbl2;
     private javax.swing.JLabel cusIdLbl3;
     private javax.swing.JTextField cusIdTxt;
-    private javax.swing.JTextField cusIdTxt1;
-    private javax.swing.JTextField cusIdTxt2;
-    private javax.swing.JTextField cusIdTxt3;
-    private javax.swing.JButton jButton1;
+    private javax.swing.JTextField cusName;
+    private javax.swing.JTextField cusNic;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
