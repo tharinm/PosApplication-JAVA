@@ -4,6 +4,10 @@
  */
 package view;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author tharindumadhushan
@@ -127,10 +131,13 @@ public class CustomerView extends javax.swing.JFrame {
 //        int contact=cusContact.getText();
         int contact = Integer.parseInt(cusContact.getText());
 
-        System.out.println(" ID " + id);
-        System.out.println(" Name " + customerName);
-        System.out.println(" NIC " + nic);
-        System.out.println(" NIC " + contact);
+        //get database connection
+        try{
+         Class.forName("com.mysql.cj.jdbc.Driver");
+        }
+        catch(ClassNotFoundException ex) {
+             JOptionPane.showMessageDialog(rootPane, ex.getMessage());
+        }
     }//GEN-LAST:event_addButtonActionPerformed
 
     private void cusIdTxtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cusIdTxtActionPerformed
