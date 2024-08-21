@@ -146,7 +146,6 @@ public class CustomerView extends javax.swing.JFrame {
 
         //SQl query to insert customer data
         String sql = "INSERT INTO customer VALUES(?,?,?,?)";
-        
 
         try {
 
@@ -164,19 +163,20 @@ public class CustomerView extends javax.swing.JFrame {
             preparedStatement.setString(3, nic);
             preparedStatement.setInt(4, contact);
 
-         int result=   preparedStatement.executeUpdate();
-         
-         if(result>0){
-             JOptionPane.showMessageDialog(this,"Added Successfully");
-         }
-         else{
-         
-         }
+            int result = preparedStatement.executeUpdate();
+
+            if (result > 0) {
+                JOptionPane.showMessageDialog(this, "Added Successfully");
+                clearForm();
+
+            } else {
+
+            }
 
         } catch (ClassNotFoundException ex) {
             JOptionPane.showMessageDialog(rootPane, ex.getMessage());
         } catch (SQLException ex) {
-            Logger.getLogger(CustomerView.class.getName()).log(Level.SEVERE, null, ex);
+             JOptionPane.showMessageDialog(rootPane, ex.getMessage()); 
         }
     }//GEN-LAST:event_addButtonActionPerformed
 
@@ -221,6 +221,13 @@ public class CustomerView extends javax.swing.JFrame {
                 new CustomerView().setVisible(true);
             }
         });
+    }
+
+    public void clearForm() {
+        cusIdTxt.setText("");
+        cusName.setText("");
+        cusNic.setText("");
+        cusContact.setText("");
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
