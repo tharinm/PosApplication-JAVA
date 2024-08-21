@@ -4,7 +4,12 @@
  */
 package view;
 
+import com.mysql.cj.jdbc.Driver;
+import java.sql.PreparedStatement;
+import java.sql.Connection;
 import java.util.logging.Level;
+import java.sql.DriverManager;
+import java.sql.SQLException;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
@@ -131,12 +136,47 @@ public class CustomerView extends javax.swing.JFrame {
 //        int contact=cusContact.getText();
         int contact = Integer.parseInt(cusContact.getText());
 
+        String url = "jdbc:mysql://localhost:3306/pos_db";
+        String user = "root";
+        String password = "rootrootroot";
+
         //get database connection
-        try{
-         Class.forName("com.mysql.cj.jdbc.Driver");
-        }
-        catch(ClassNotFoundException ex) {
-             JOptionPane.showMessageDialog(rootPane, ex.getMessage());
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+
+        //SQl query to insert customer data
+        String sql = "INSERT INTO customer VALUES(?,?,?,?)";
+        
+
+        try {
+
+            //load jdbc driver
+            Class.forName("com.mysql.cj.jdbc.Driver");
+
+            //establish connection
+            connection = DriverManager.getConnection(url, user, password);
+
+            //prepares sql statement
+            preparedStatement = connection.prepareStatement(sql);
+
+            preparedStatement.setString(1, id);
+            preparedStatement.setString(2, customerName);
+            preparedStatement.setString(3, nic);
+            preparedStatement.setInt(4, contact);
+
+         int result=   preparedStatement.executeUpdate();
+         
+         if(result>0){
+             JOptionPane.showMessageDialog(this,"Added Successfully");
+         }
+         else{
+         
+         }
+
+        } catch (ClassNotFoundException ex) {
+            JOptionPane.showMessageDialog(rootPane, ex.getMessage());
+        } catch (SQLException ex) {
+            Logger.getLogger(CustomerView.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_addButtonActionPerformed
 
