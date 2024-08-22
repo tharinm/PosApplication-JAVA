@@ -5,6 +5,7 @@
 package view;
 
 import com.mysql.cj.jdbc.Driver;
+import java.sql.ResultSet;
 import java.sql.PreparedStatement;
 import java.sql.Connection;
 import java.util.logging.Level;
@@ -46,6 +47,7 @@ public class CustomerView extends javax.swing.JFrame {
         cusIdLbl3 = new javax.swing.JLabel();
         cusContact = new javax.swing.JTextField();
         addButton = new javax.swing.JButton();
+        searchBtn = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -108,7 +110,17 @@ public class CustomerView extends javax.swing.JFrame {
                 addButtonActionPerformed(evt);
             }
         });
-        jPanel1.add(addButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 370, 110, -1));
+        jPanel1.add(addButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 370, 110, -1));
+
+        searchBtn.setBackground(new java.awt.Color(255, 102, 255));
+        searchBtn.setFont(new java.awt.Font("Kohinoor Gujarati", 3, 14)); // NOI18N
+        searchBtn.setText("SeachButton");
+        searchBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                searchBtnActionPerformed(evt);
+            }
+        });
+        jPanel1.add(searchBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 360, 130, 40));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -176,7 +188,19 @@ public class CustomerView extends javax.swing.JFrame {
         } catch (ClassNotFoundException ex) {
             JOptionPane.showMessageDialog(rootPane, ex.getMessage());
         } catch (SQLException ex) {
-             JOptionPane.showMessageDialog(rootPane, ex.getMessage()); 
+            JOptionPane.showMessageDialog(rootPane, ex.getMessage());
+        } finally {
+            try {
+                if (connection != null) {
+                    connection.close();
+                }
+
+                if (preparedStatement != null) {
+                    preparedStatement.close();
+                }
+            } catch (SQLException ex) {
+                JOptionPane.showMessageDialog(this, ex.getMessage());
+            }
         }
     }//GEN-LAST:event_addButtonActionPerformed
 
@@ -187,6 +211,58 @@ public class CustomerView extends javax.swing.JFrame {
     private void cusContactActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cusContactActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_cusContactActionPerformed
+
+    private void searchBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchBtnActionPerformed
+
+        String id = cusIdTxt.getText();
+
+        String url = "jdbc:mysql://localhost:3306/pos_db";
+        String user = "root";
+        String password = "rootrootroot";
+
+        //get database connection
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+
+        //SQl query to insert customer data
+        String sql = "SELECT * FROM CUSTOMER WHERE id= ?";
+
+        try {
+            //load jdbc driver
+            Class.forName("com.mysql.cj.jdbc.Driver");
+
+            //establish connection
+            connection = DriverManager.getConnection(url, user, password);
+
+            //prepares sql statement
+            preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setString(1, id);
+
+            resultSet = preparedStatement.executeQuery();
+
+            if (resultSet.next()) {
+                String rsId = resultSet.getString("id");
+                String rsName = resultSet.getString("name");
+                String rsNic = resultSet.getString("nic");
+                int rsContact = resultSet.getInt("contact");
+
+//                System.out.println("Id " + rsId);
+//                System.out.println("Name " + rsName);
+//                System.out.println("Nic " + rsNic);
+//                System.out.println("COntact " + rsContact);
+                cusName.setText(rsName);
+                cusNic.setText(rsNic);
+                cusContact.setText("" + rsContact);
+
+            }
+
+        } catch (ClassNotFoundException ex) {
+            JOptionPane.showMessageDialog(rootPane, ex.getMessage());
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(rootPane, ex.getMessage());
+        }
+    }//GEN-LAST:event_searchBtnActionPerformed
 
     /**
      * @param args the command line arguments
@@ -242,5 +318,6 @@ public class CustomerView extends javax.swing.JFrame {
     private javax.swing.JTextField cusNic;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JButton searchBtn;
     // End of variables declaration//GEN-END:variables
 }
