@@ -64,9 +64,9 @@ public class CustomerView extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Marker Felt", 1, 36)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 0, 0));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("Customers CRUD");
+        jLabel1.setText("Customers System");
         jLabel1.setOpaque(true);
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 20, -1, -1));
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 20, -1, -1));
 
         cusIdLbl.setFont(new java.awt.Font("Lucida Grande", 1, 14)); // NOI18N
         cusIdLbl.setText("Customer ID");
@@ -397,31 +397,39 @@ public class CustomerView extends javax.swing.JFrame {
 
     private void deleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteActionPerformed
 
-        String id = cusIdTxt.getText();
+     String id = cusIdTxt.getText();
 
-        String url = "jdbc:mysql://localhost:3306/pos_db";
-        String user = "root";
-        String password = "rootrootroot";
+    String url = "jdbc:mysql://localhost:3306/pos_db";
+    String user = "root";
+    String password = "rootrootroot";
 
-        Connection connection = null;
-        PreparedStatement preparedStatement = null;
+    Connection connection = null;
+    PreparedStatement preparedStatement = null;
 
-        //SQl query to insert customer data
-        String sql = "DELETE FROM CUSTOMER WHERE id=?";
+    // SQL query to delete customer data
+    String sql = "DELETE FROM CUSTOMER WHERE id=?";
 
+    // Show confirmation dialog
+    int response = JOptionPane.showConfirmDialog(this, 
+            "Are you sure you want to delete this customer?", 
+            "Confirm Delete", 
+            JOptionPane.YES_NO_OPTION, 
+            JOptionPane.WARNING_MESSAGE);
+
+    if (response == JOptionPane.YES_OPTION) {
         try {
-            //load jdbc driver
+            // Load JDBC driver
             Class.forName("com.mysql.cj.jdbc.Driver");
 
-            //establish connection
+            // Establish connection
             connection = DriverManager.getConnection(url, user, password);
 
-            //prepares sql statement
+            // Prepare SQL statement
             preparedStatement = connection.prepareStatement(sql);
             preparedStatement.setString(1, id);
-            int rest = preparedStatement.executeUpdate();
+            int result = preparedStatement.executeUpdate();
 
-            if (rest > 0) {
+            if (result > 0) {
                 clearForm();
                 searchAllCustomers();
                 JOptionPane.showMessageDialog(this, "Delete Successfully");
@@ -445,7 +453,10 @@ public class CustomerView extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(this, ex.getMessage());
             }
         }
-
+    } else {
+        // User chose "No" option
+        JOptionPane.showMessageDialog(this, "Delete operation canceled.");
+    }
 
     }//GEN-LAST:event_deleteActionPerformed
 
