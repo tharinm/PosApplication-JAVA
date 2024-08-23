@@ -13,6 +13,7 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -25,6 +26,7 @@ public class CustomerView extends javax.swing.JFrame {
      */
     public CustomerView() {
         initComponents();
+        searchAllCustomers();
     }
 
     /**
@@ -49,6 +51,8 @@ public class CustomerView extends javax.swing.JFrame {
         addButton = new javax.swing.JButton();
         searchBtn = new javax.swing.JButton();
         updateBtn = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        datatable = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -134,19 +138,36 @@ public class CustomerView extends javax.swing.JFrame {
         });
         jPanel1.add(updateBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 370, 90, -1));
 
+        datatable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "ID", "Name", "NIC", "CONTACT"
+            }
+        ));
+        jScrollPane1.setViewportView(datatable);
+
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 440, -1, 240));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 524, Short.MAX_VALUE)
+                .addContainerGap()
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 699, Short.MAX_VALUE)
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 456, Short.MAX_VALUE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addContainerGap()
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 700, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         pack();
@@ -336,8 +357,7 @@ public class CustomerView extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(rootPane, ex.getMessage());
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(rootPane, ex.getMessage());
-        }
-        finally {
+        } finally {
             try {
                 if (connection != null) {
                     connection.close();
@@ -355,6 +375,67 @@ public class CustomerView extends javax.swing.JFrame {
         }
 
     }//GEN-LAST:event_updateBtnActionPerformed
+
+    public void searchAllCustomers() {
+        String url = "jdbc:mysql://localhost:3306/pos_db";
+        String user = "root";
+        String password = "rootrootroot";
+
+        //get database connection
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+
+        ResultSet rst = null;
+
+        DefaultTableModel dtm = (DefaultTableModel) datatable.getModel();
+        dtm.setRowCount(0);
+
+        //SQl query to insert customer data
+        String sql = "SELECT * FROM CUSTOMER";
+
+        try {
+            //load jdbc driver
+            Class.forName("com.mysql.cj.jdbc.Driver");
+
+            //establish connection
+            connection = DriverManager.getConnection(url, user, password);
+
+            //prepares sql statement
+            preparedStatement = connection.prepareStatement(sql);
+
+            rst = preparedStatement.executeQuery();
+
+            
+            while (rst.next()) {
+                String id = rst.getString("id");
+                String name = rst.getString("name");
+                String nic = rst.getString("nic");
+                int contact = rst.getInt("contact");
+
+                dtm.addRow(new Object[]{id, name, nic, contact});
+            }
+
+        } catch (ClassNotFoundException ex) {
+            JOptionPane.showMessageDialog(rootPane, ex.getMessage());
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(rootPane, ex.getMessage());
+        } finally {
+            try {
+                if (connection != null) {
+                    connection.close();
+                }
+
+                if (preparedStatement != null) {
+                    preparedStatement.close();
+                }
+                if (rst != null) {
+                    rst.close();
+                }
+            } catch (SQLException ex) {
+                JOptionPane.showMessageDialog(this, ex.getMessage());
+            }
+        }
+    }
 
     /**
      * @param args the command line arguments
@@ -408,8 +489,10 @@ public class CustomerView extends javax.swing.JFrame {
     private javax.swing.JTextField cusIdTxt;
     private javax.swing.JTextField cusName;
     private javax.swing.JTextField cusNic;
+    private javax.swing.JTable datatable;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JButton searchBtn;
     private javax.swing.JButton updateBtn;
     // End of variables declaration//GEN-END:variables
