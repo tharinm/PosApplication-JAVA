@@ -15,3 +15,6 @@ MySQL: For storing customer data.
 JDBC: For connecting and interacting with the MySQL database.
 
 
+https://github.com/user-attachments/assets/e8935da2-c81c-4ea6-92db-4b0362a53a5a
+
+
