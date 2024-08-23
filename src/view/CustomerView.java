@@ -53,19 +53,20 @@ public class CustomerView extends javax.swing.JFrame {
         updateBtn = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         datatable = new javax.swing.JTable();
+        delete = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jPanel1.setBackground(new java.awt.Color(255, 204, 102));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel1.setBackground(new java.awt.Color(255, 255, 153));
+        jLabel1.setBackground(new java.awt.Color(255, 255, 204));
         jLabel1.setFont(new java.awt.Font("Marker Felt", 1, 36)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(255, 153, 102));
+        jLabel1.setForeground(new java.awt.Color(255, 0, 0));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("Customer Form");
+        jLabel1.setText("Customers CRUD");
         jLabel1.setOpaque(true);
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 10, -1, -1));
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 20, -1, -1));
 
         cusIdLbl.setFont(new java.awt.Font("Lucida Grande", 1, 14)); // NOI18N
         cusIdLbl.setText("Customer ID");
@@ -115,17 +116,17 @@ public class CustomerView extends javax.swing.JFrame {
                 addButtonActionPerformed(evt);
             }
         });
-        jPanel1.add(addButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 370, 110, -1));
+        jPanel1.add(addButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 348, 100, 40));
 
         searchBtn.setBackground(new java.awt.Color(255, 102, 255));
         searchBtn.setFont(new java.awt.Font("Kohinoor Gujarati", 3, 14)); // NOI18N
-        searchBtn.setText("SeachButton");
+        searchBtn.setText("Seach");
         searchBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 searchBtnActionPerformed(evt);
             }
         });
-        jPanel1.add(searchBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 360, 130, 40));
+        jPanel1.add(searchBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 350, 110, 40));
 
         updateBtn.setBackground(new java.awt.Color(0, 153, 0));
         updateBtn.setFont(new java.awt.Font("Hiragino Sans GB", 0, 14)); // NOI18N
@@ -136,8 +137,12 @@ public class CustomerView extends javax.swing.JFrame {
                 updateBtnActionPerformed(evt);
             }
         });
-        jPanel1.add(updateBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 370, 90, -1));
+        jPanel1.add(updateBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 350, 90, 40));
 
+        datatable.setBackground(new java.awt.Color(255, 255, 153));
+        datatable.setBorder(javax.swing.BorderFactory.createCompoundBorder());
+        datatable.setFont(new java.awt.Font("Hiragino Maru Gothic ProN", 0, 13)); // NOI18N
+        datatable.setForeground(new java.awt.Color(102, 102, 102));
         datatable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
@@ -149,9 +154,21 @@ public class CustomerView extends javax.swing.JFrame {
                 "ID", "Name", "NIC", "CONTACT"
             }
         ));
+        datatable.setRowHeight(35);
+        datatable.setSelectionForeground(new java.awt.Color(0, 153, 51));
         jScrollPane1.setViewportView(datatable);
 
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 440, -1, 240));
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 430, 410, 310));
+
+        delete.setBackground(new java.awt.Color(255, 0, 0));
+        delete.setFont(new java.awt.Font("Malayalam MN", 1, 14)); // NOI18N
+        delete.setText("Delete");
+        delete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                deleteActionPerformed(evt);
+            }
+        });
+        jPanel1.add(delete, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 350, -1, 40));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -159,14 +176,14 @@ public class CustomerView extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 699, Short.MAX_VALUE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 542, Short.MAX_VALUE)
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 700, Short.MAX_VALUE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 780, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -213,6 +230,7 @@ public class CustomerView extends javax.swing.JFrame {
             if (result > 0) {
                 JOptionPane.showMessageDialog(this, "Added Successfully");
                 clearForm();
+                searchAllCustomers();
 
             } else {
 
@@ -351,6 +369,7 @@ public class CustomerView extends javax.swing.JFrame {
             if (result > 0) {
                 clearForm();
                 JOptionPane.showMessageDialog(this, "USER UPDATED");
+                searchAllCustomers();
             }
 
         } catch (ClassNotFoundException ex) {
@@ -375,6 +394,60 @@ public class CustomerView extends javax.swing.JFrame {
         }
 
     }//GEN-LAST:event_updateBtnActionPerformed
+
+    private void deleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteActionPerformed
+
+        String id = cusIdTxt.getText();
+
+        String url = "jdbc:mysql://localhost:3306/pos_db";
+        String user = "root";
+        String password = "rootrootroot";
+
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+
+        //SQl query to insert customer data
+        String sql = "DELETE FROM CUSTOMER WHERE id=?";
+
+        try {
+            //load jdbc driver
+            Class.forName("com.mysql.cj.jdbc.Driver");
+
+            //establish connection
+            connection = DriverManager.getConnection(url, user, password);
+
+            //prepares sql statement
+            preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setString(1, id);
+            int rest = preparedStatement.executeUpdate();
+
+            if (rest > 0) {
+                clearForm();
+                searchAllCustomers();
+                JOptionPane.showMessageDialog(this, "Delete Successfully");
+            }
+
+        } catch (ClassNotFoundException ex) {
+            JOptionPane.showMessageDialog(rootPane, ex.getMessage());
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(rootPane, ex.getMessage());
+        } finally {
+            try {
+                if (connection != null) {
+                    connection.close();
+                }
+
+                if (preparedStatement != null) {
+                    preparedStatement.close();
+                }
+
+            } catch (SQLException ex) {
+                JOptionPane.showMessageDialog(this, ex.getMessage());
+            }
+        }
+
+
+    }//GEN-LAST:event_deleteActionPerformed
 
     public void searchAllCustomers() {
         String url = "jdbc:mysql://localhost:3306/pos_db";
@@ -405,7 +478,6 @@ public class CustomerView extends javax.swing.JFrame {
 
             rst = preparedStatement.executeQuery();
 
-            
             while (rst.next()) {
                 String id = rst.getString("id");
                 String name = rst.getString("name");
@@ -490,6 +562,7 @@ public class CustomerView extends javax.swing.JFrame {
     private javax.swing.JTextField cusName;
     private javax.swing.JTextField cusNic;
     private javax.swing.JTable datatable;
+    private javax.swing.JButton delete;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
